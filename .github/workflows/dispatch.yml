@@ -1,0 +1,18 @@
+name: dispatch-test
+on:
+  repository_dispatch:
+    types: [horseci-e2e-trigger]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run tests
+        run: |
+          echo "Building..."
+          go build ./...
+          echo "Testing..."
+          go test ./...
+          echo "Dispatch trigger received successfully!"
